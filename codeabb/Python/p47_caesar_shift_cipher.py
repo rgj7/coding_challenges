@@ -4,11 +4,22 @@ Coded by whoisrgj
 """
 
 import string
-N, K = map(int, input().split())
-letters = list(string.ascii_uppercase)
-for i in range(N):
-    line = input()
-    for c in line:
-        index = ord(c)
-        print(letters[(index-65-K)%26] if 64<index<91 else c, end='')
-    print('', end=' ')
+
+
+def csc(ch, k):
+    try:
+        return string.ascii_uppercase[string.ascii_uppercase.index(ch)-k]
+    except ValueError:
+        return ch
+
+
+def main():
+    n, k = map(int, input().split())
+    results = list()
+    for _ in range(n):
+        line = input()
+        results.append("".join([csc(c, k) for c in line]))
+    print(" ".join(results))
+
+if __name__ == '__main__':
+    main()
