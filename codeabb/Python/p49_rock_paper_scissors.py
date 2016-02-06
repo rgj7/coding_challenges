@@ -3,14 +3,16 @@ CodeAbbey, Problem 49
 Coded by whoisrgj
 """
 
-N = int(input())
 
-for i in range(N):
-    rounds = list(input().split())
+def solve(games):
     player1, player2 = 0, 0
-    for round in rounds:
-        if round in ('RS', 'SP', 'PR'):
+    for game in games:
+        if game in ('RS', 'SP', 'PR'):
             player1 += 1
-        elif round in ('SR', 'PS', 'RP'):
+        elif game in ('SR', 'PS', 'RP'):
             player2 += 1
-    print(1 if player1 > player2 else 2, end=' ')
+    return 1 if player1 > player2 else 2
+
+if __name__ == '__main__':
+    N = int(input())
+    print(*[solve(list(input().split())) for _ in range(N)])

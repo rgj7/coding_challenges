@@ -3,7 +3,10 @@ CodeAbbey, Problem 44
 Coded by whoisrgj
 """
 
-N = int(input())
-for tc in range(N):
-    A, B = map(int, input().split())
-    print(((A % 6)+1) + ((B % 6)+1), end=' ')
+
+def calculate(a, b):
+    return ((a % 6) + 1) + ((b % 6) + 1)
+
+if __name__ == '__main__':
+    N = int(input())
+    print(*map(str, [calculate(*map(int, input().split())) for _ in range(N)]))

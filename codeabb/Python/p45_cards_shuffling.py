@@ -3,21 +3,16 @@ CodeAbbey, Problem 45
 Coded by Raul Gonzalez
 """
 
+RANKS = "A23456789TJQK"
+SUITS = "CDHS"
 
-class Problem45:
-    def __init__(self):
-        self.RANKS = "A23456789TJQK"
-        self.SUITS = "CDHS"
-        self.deck = ["{}{}".format(s, r) for s in self.SUITS for r in self.RANKS]
 
-    def solve(self):
-        random_numbers = list(map(int, input().split()))
-        for i in range(52):
-            j = random_numbers[i] % 52
-            self.deck[i], self.deck[j] = self.deck[j], self.deck[i]
-        return " ".join(self.deck)
-
+def solve(random_numbers):
+    deck = ["{}{}".format(s, r) for s in SUITS for r in RANKS]
+    for i in range(52):
+        j = random_numbers[i] % 52
+        deck[i], deck[j] = deck[j], deck[i]
+    return deck
 
 if __name__ == "__main__":
-
-    print(Problem45().solve())
+    print(*solve(list(map(int, input().split()))))
