@@ -3,19 +3,21 @@ CodeAbbey, Problem 127
 Coded by whoisrgj
 """
 
-from collections import defaultdict
 
-try:
-    wordlist = defaultdict(list)
-    with open('words.txt', 'r') as file:
-        for word in file.read().splitlines():
-            word_sorted = "".join(sorted(word))
-            wordlist[word_sorted].append(word)
-except IOError as e:
-    print("I/O Error({0}): {1}".format(e.errno, e.strerror))
-    
-N = int(input())
-for tc in range(N):
-    word = input()
+def anagram_count(word):
+    count = -1  # accounts for original word
     word_sorted = "".join(sorted(word))
-    print(len([w for w in wordlist[word_sorted]])-1, end=' ')
+    with open('words.txt', 'r') as f:
+        for line in f:
+            test_word = line.rstrip()
+            if len(word) == len(test_word) and word_sorted == "".join(sorted(test_word)):
+                count += 1
+    return count
+
+
+def main():
+    n = int(input())
+    print(*(anagram_count(input()) for _ in range(n)))
+
+if __name__ == '__main__':
+    main()

@@ -1,15 +1,20 @@
+"""
+CodeAbbey, Problem 128
+Coded by whoisrgj
+"""
+
 
 def factorial(n):
-	if n == 0:
-		return 1
-	else:
-		return n * factorial(n-1)
+    return n * factorial(n-1) if n > 0 else 1
+
 
 def combinations(n, k):
-	return factorial(n) // (factorial(k) * factorial(n-k))
-		
-test_cases = int(input())
-for i in range(test_cases):
-	N, K = map(int, input().split())
-	print(combinations(N, K), end=" ")
-	
+    return factorial(n) // (factorial(k) * factorial(n-k))
+
+
+def main():
+    n = int(input())
+    print(*(combinations(*map(int, input().split())) for _ in range(n)))
+
+if __name__ == '__main__':
+    main()
