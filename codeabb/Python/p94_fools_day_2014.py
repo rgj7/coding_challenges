@@ -3,7 +3,10 @@ CodeAbbey, Problem 94
 Coded by whoisrgj
 """
 
-N = int(input())
-for i in range(N):
-    numbers = list(map(int, input().split()))
-    print(sum([x**2 for x in numbers]), end= ' ')
+
+def main():
+    n = int(input())
+    print(*[sum([x**2 for x in list(map(int, input().split()))]) for _ in range(n)])
+
+if __name__ == '__main__':
+    main()

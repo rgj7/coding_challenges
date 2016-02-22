@@ -1,33 +1,31 @@
+"""
+CodeAbbey, Problem 131
+Coded by whoisrgj
+"""
 from collections import Counter
 
-def isValidWord(length, letters_count, letters_given, word):
-	if(len(word) != length):
-		return False
-	word_letter_count = Counter()
-	for c in word:
-		word_letter_count[c] += 1
-	for c in word:
-		if word_letter_count[c] > letters_count[c]:
-			return False
-	return True
 
-test_cases = int(input())
-for i in range(test_cases):
-	# get input
-	letters_given = input().split()
-	length = int(letters_given.pop(0))
-	
-	# count letters in input
-	letters_count = Counter()
-	for c in letters_given:
-		letters_count[c] += 1
-		
-	# search for words
-	words = list()
-	f = open('words.txt', 'r')
-	for line in f:
-		word = line.rstrip()
-		if isValidWord(length, letters_count, letters_given, word):
-			words.append(word)
-	#print(words)
-	print(len(words), end=" ")
+def get_valid_word_count(length, letters):
+    count = 0
+    with open('words.txt') as f:
+        for line in f:
+            word = line.rstrip()
+            if len(word) == length:
+                counter = Counter(word)  # counter for characters in word
+                counter.subtract(letters)  # for each char in letters, reduce in counter
+                if not len(+counter):  # +counter: removes values 0 or less. len should be 0.
+                    count += 1
+    return count
+
+
+def main():
+    n = int(input())
+    results = []
+    for _ in range(n):
+        letters = input().split()
+        length = int(letters.pop(0))
+        results.append(get_valid_word_count(length, letters))
+    print(*results)
+
+if __name__ == '__main__':
+    main()

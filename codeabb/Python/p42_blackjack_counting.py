@@ -3,16 +3,19 @@ CodeAbbey, Problem 42
 Coded by whoisrgj
 """
 
-FACE_CARDS = frozenset('TJQK')
-
 
 def blackjack_result(cards):
+    """
+    Determines the result of a Blackjack game, given a list of cards.
+    :param cards: A list of card values.
+    :return: A string with the result.
+    """
     points, ace_count = 0, 0
     for card in cards:
         if card == 'A':
             points += 11
             ace_count += 1
-        elif card in FACE_CARDS:
+        elif card in 'TJQK':
             points += 10
         else:
             points += int(card)
@@ -22,6 +25,9 @@ def blackjack_result(cards):
     return "Bust" if points > 21 else str(points)
 
 
+def main():
+    n = int(input())
+    print(*(blackjack_result(input().split()) for _ in range(n)))
+
 if __name__ == '__main__':
-    N = int(input())
-    print(" ".join([blackjack_result(list(input().split())) for _ in range(N)]))
+    main()

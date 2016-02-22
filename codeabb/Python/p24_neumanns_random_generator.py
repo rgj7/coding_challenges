@@ -12,7 +12,11 @@ def nrg(value):
         results.add(result)
         result = str(int(result)**2).zfill(8)[2:6]
 
-if __name__ == '__main__':
-    N = int(input())  # not used
+
+def main():
+    n = int(input())  # not used
     values = list(input().split())
     print(*(sum(1 for i in nrg(value)) for value in values))
+
+if __name__ == '__main__':
+    main()

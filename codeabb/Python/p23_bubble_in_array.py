@@ -22,7 +22,10 @@ def solve(values):
     return swaps, calculate_checksum(values, 113, 10000007)
 
 
-if __name__ == '__main__':
+def main():
     array_values = list(map(int, input().split()))
     array_values.pop()  # remove -1 at end of list
     print(*solve(array_values))
+
+if __name__ == '__main__':
+    main()

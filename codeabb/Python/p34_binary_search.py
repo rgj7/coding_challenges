@@ -26,7 +26,9 @@ def binary_search(a, b, c, d):
     return "{:.8f}".format(x)
 
 
-if __name__ == "__main__":
-    N = int(input())
-    print(*[binary_search(*map(float, input().split())) for _ in range(N)])
+def main():
+    n = int(input())
+    print(*(binary_search(*map(float, input().split())) for _ in range(n)))
 
+if __name__ == '__main__':
+    main()
