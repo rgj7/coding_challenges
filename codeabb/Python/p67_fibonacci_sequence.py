@@ -5,12 +5,15 @@ Coded by whoisrgj
 
 import math
 
-T = int(input())
 
-for tc in range(T):
-    F = int(input())
-    idx = round(math.log(F*math.sqrt(5)+0.5, (1+math.sqrt(5))/2))
-    if idx < 0:
-        print(0, end=' ')
-    else:
-        print(idx, end=' ')
+def get_fibonacci_index(fibonacci_value):
+    idx = round(math.log(fibonacci_value * math.sqrt(5) + 0.5, (1 + math.sqrt(5)) / 2))
+    return idx if idx > 0 else 0
+
+
+def main():
+    n = int(input())
+    print(*(get_fibonacci_index(int(input())) for _ in range(n)))
+
+if __name__ == '__main__':
+    main()
