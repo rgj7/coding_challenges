@@ -20,8 +20,16 @@ def sum_of_digits2(number):
 
 def main():
     n = int(input())
-    values = [(a*b)+c for a, b, c in [map(int, input().split()) for _ in range(n)]]
-    print(*map(sum_of_digits, values))
+    # values = [(a*b)+c
+    #           for a, b, c in [map(int, input().split())
+    #                           for _ in range(n)]]
+    # print(*map(sum_of_digits, values))
+
+    input_values = [map(int, input().split()) for _ in range(n)]
+    values = [str((a*b)+c) for a, b, c in input_values]
+    answers = " ".join(map(sum_of_digits, values))
+    print(answers)
+
 
 if __name__ == '__main__':
     main()
