@@ -1,6 +1,6 @@
 """
 CodeAbbey, Problem 74
-Coded by Raul Gonzalez
+Coded by whoisrgj
 """
 
 import math
@@ -12,43 +12,42 @@ class Point:
         self.y = y
 
 
-class Problem74:
-    def __init__(self):
-        self.MINUTE_HAND_LENGTH = 9.0
-        self.HOUR_HAND_LENGTH = 6.0
-        self.DEGREES_PER_MINUTE = 6.0
-        self.DEGREES_PER_HOUR = 30.0
-        self.ORIGIN_X = 10.0
-        self.ORIGIN_Y = 10.0
+class ClockHands(object):
+    MINUTE_HAND_LENGTH = 9.0
+    HOUR_HAND_LENGTH = 6.0
+    DEGREES_PER_MINUTE = 6.0
+    DEGREES_PER_HOUR = 30.0
+    ORIGIN_X = 10.0
+    ORIGIN_Y = 10.0
 
-    def get_minute_hand_end_point(self, m):
-        minute_hand_end_point = Point()
+    def get_minute_hand_endpoint(self, m):
         radians = math.radians(self.DEGREES_PER_MINUTE*m)
-        minute_hand_end_point.x = self.MINUTE_HAND_LENGTH*math.sin(radians)+self.ORIGIN_X
-        minute_hand_end_point.y = self.MINUTE_HAND_LENGTH*math.cos(radians)+self.ORIGIN_Y
-        return minute_hand_end_point
+        return self._init_endpoint(self.MINUTE_HAND_LENGTH, radians)
 
-    def get_hour_hand_end_point(self, h, m):
-        hour_hand_end_point = Point()
+    def get_hour_hand_endpoint(self, h, m):
         h %= 12  # converts 24-hr to 12-hr
-        radians = math.radians(self.DEGREES_PER_HOUR*h + 0.5*m)  # 0.5 = 30 deg in hr / 60 min
-        hour_hand_end_point.x = self.HOUR_HAND_LENGTH*math.sin(radians)+self.ORIGIN_X
-        hour_hand_end_point.y = self.HOUR_HAND_LENGTH*math.cos(radians)+self.ORIGIN_Y
-        return hour_hand_end_point
+        # 0.5 = 30 deg in hr / 60 min
+        radians = math.radians(self.DEGREES_PER_HOUR*h + 0.5*m)
+        return self._init_endpoint(self.HOUR_HAND_LENGTH, radians)
 
-    def solve(self):
-        clock_hand_points = list()
-        test_cases = int(input())
-        times = list(input().split())
-        for tc in range(test_cases):
-            hour, minute = map(int, times[tc].split(":"))
-            hour_end_pnt = self.get_hour_hand_end_point(hour, minute)
-            min_end_pnt = self.get_minute_hand_end_point(minute)
-            clock_hand_points.append(
-                "{:.8f} {:.8f} {:.8f} {:.8f}".format(hour_end_pnt.x, hour_end_pnt.y, min_end_pnt.x, min_end_pnt.y)
-            )
-        print(" ".join(clock_hand_points))
+    def _init_endpoint(self, length, radians):
+        return Point(
+            x=length*math.sin(radians)+self.ORIGIN_X,
+            y=length*math.cos(radians)+self.ORIGIN_Y)
 
+    def get_endpoints(self, hour, minute):
+        hour_endpoint = self.get_hour_hand_endpoint(hour, minute)
+        minute_endpoint = self.get_minute_hand_endpoint(minute)
+        return "{:.8f} {:.8f} {:.8f} {:.8f}".format(
+            hour_endpoint.x, hour_endpoint.y,
+            minute_endpoint.x, minute_endpoint.y)
+
+
+def main():
+    n = int(input())  # not used
+    times = list(input().split())
+    ch = ClockHands()
+    print(*(ch.get_endpoints(*map(int, time.split(":"))) for time in times))
 
 if __name__ == "__main__":
-    Problem74().solve()
+    main()

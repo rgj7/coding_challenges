@@ -2,10 +2,14 @@
 CodeAbbey, Problem 85
 Coded by whoisrgj
 """
-from collections import namedtuple
 import math
 
-Star = namedtuple('Star', 'name x y')
+
+class Star(object):
+    def __init__(self, name, x, y):
+        self.name = name
+        self.x = x
+        self.y = y
 
 
 class Problem85(object):
@@ -13,21 +17,25 @@ class Problem85(object):
         self.stars = stars
 
     def rotate(self, angle):
-        rotated_stars = []
         radians = math.radians(angle)
         for star in self.stars:
-            x = round((star.x * math.cos(radians)) - (star.y * math.sin(radians)))
-            y = round((star.x * math.sin(radians)) + (star.y * math.cos(radians)))
-            rotated_stars.append(Star(star.name, x, y))
-        self.stars = rotated_stars
+            x = round(
+                (star.x * math.cos(radians)) - (star.y * math.sin(radians)))
+            y = round(
+                (star.x * math.sin(radians)) + (star.y * math.cos(radians)))
+            star.x, star.y = x, y
 
     def __str__(self):
-        return " ".join(star.name for star in sorted(self.stars, key=lambda s: (s.y, s.x)))
+        sorted_stars = sorted(self.stars, key=lambda s: (s.y, s.x))
+        return " ".join(star.name for star in sorted_stars)
 
 
 def main():
     n, angle = map(int, input().split())
-    stars = [Star(name, int(x), int(y)) for name, x, y in (input().split() for _ in range(n))]
+    stars = []
+    for _ in range(n):
+        name, x, y = input().split()
+        stars.append(Star(name, int(x), int(y)))
     p = Problem85(stars)
     p.rotate(angle)
     print(p)
