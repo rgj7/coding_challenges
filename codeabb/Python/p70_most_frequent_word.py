@@ -1,5 +1,5 @@
 """
-CodeAbbey, Problem 72
+CodeAbbey, Problem 70
 Coded by whoisrgj
 """
 from collections import Counter

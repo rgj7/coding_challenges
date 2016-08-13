@@ -14,7 +14,7 @@ def cloud_altitude(d1, a, b):
 
 def main():
     n = int(input())
-    print(*(cloud_altitude(d1, a, b) for d1, a, b in (map(float, input().split()) for _ in range(n))))
+    print(*(cloud_altitude(*map(float, input().split())) for _ in range(n)))
 
 if __name__ == '__main__':
     main()

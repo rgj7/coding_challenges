@@ -11,7 +11,11 @@ def tree_height_measurement(distance, degrees):
 
 def main():
     n = int(input())
-    print(*(tree_height_measurement(a, b) for a, b in (map(float, input().split()) for _ in range(n))))
+    results = []
+    for _ in range(n):
+        dist, deg = map(float, input().split())
+        results.append(tree_height_measurement(dist, deg))
+    print(*results)
 
 if __name__ == '__main__':
     main()

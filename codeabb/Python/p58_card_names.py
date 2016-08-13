@@ -1,5 +1,5 @@
 """
-CodeAbbey, Problem 8
+CodeAbbey, Problem 58
 Coded by whoisrgj
 """
 
@@ -12,9 +12,9 @@ def get_card_name(value):
 
 
 def main():
-    n = int(input())
+    n = int(input())  # not used
     card_values = map(int, input().split())
-    print(" ".join([get_card_name(val) for val in card_values]))
+    print(" ".join(get_card_name(val) for val in card_values))
 
 if __name__ == '__main__':
     main()
