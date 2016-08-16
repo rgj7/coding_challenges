@@ -7,18 +7,13 @@ from collections import defaultdict
 
 class GraphGenerator(object):
 
-    A = 445
-    C = 700001
-    M = 2097152
-
     def __init__(self, vertices, initial_seed):
         self.graph = defaultdict(dict)
         self.vertices = vertices
-        self.lcg = self.linear_congruential_generator(
-            self.A, self.C, self.M, initial_seed)
+        self.lcg = self.linear_congruential_generator(x=initial_seed)
 
     @staticmethod
-    def linear_congruential_generator(a, c, m, x):
+    def linear_congruential_generator(a=445, c=700001, m=2097152, x=0):
         while True:
             x = (a * x + c) % m
             yield x
