@@ -10,12 +10,11 @@ def is_triangle(a, b, c):
 
 def main():
     n = int(input())
-    # results = []
-    # for _ in range(n):
-    #     a, b, c = map(int, input().split())
-    #     results.append(is_triangle(a, b, c))
-    # print(*map(int, results))
-    print(*map(int, (is_triangle(*map(int, input().split())) for _ in range(n))))
+    results = []
+    for _ in range(n):
+        a, b, c = map(int, input().split())
+        results.append(int(is_triangle(a, b, c)))
+    print(*results)
 
 if __name__ == '__main__':
     main()

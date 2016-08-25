@@ -5,11 +5,12 @@ Coded by whoisrgj
 
 
 def sum_of_digits(number):
+    """string to int"""
     return sum(map(int, str(number)))
 
 
-# mathematical method
-def sum_of_digits2(number):
+def sum_of_digits_math(number):
+    """mathematical"""
     remainder = number
     result = 0
     while remainder > 0:
@@ -20,16 +21,11 @@ def sum_of_digits2(number):
 
 def main():
     n = int(input())
-    # values = [(a*b)+c
-    #           for a, b, c in [map(int, input().split())
-    #                           for _ in range(n)]]
-    # print(*map(sum_of_digits, values))
-
-    input_values = [map(int, input().split()) for _ in range(n)]
-    values = [str((a*b)+c) for a, b, c in input_values]
-    answers = " ".join(map(sum_of_digits, values))
-    print(answers)
-
+    results = []
+    for _ in range(n):
+        a, b, c = map(int, input().split())
+        results.append(sum_of_digits(a * b + c))
+    print(*results)
 
 if __name__ == '__main__':
     main()

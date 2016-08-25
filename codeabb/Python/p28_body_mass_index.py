@@ -14,7 +14,11 @@ def body_constitution(weight, height):
 
 def main():
     n = int(input())
-    print(" ".join([body_constitution(w, h) for w, h in [map(float, input().split()) for _ in range(n)]]))
+    results = []
+    for _ in range(n):
+        weight, height = map(float, input().split())
+        results.append(body_constitution(weight, height))
+    print(" ".join(results))
 
 if __name__ == '__main__':
     main()
